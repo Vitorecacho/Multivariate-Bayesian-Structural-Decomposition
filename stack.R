@@ -1,81 +1,161 @@
 rm(list=ls())
 
-library(fmesher)
-library(inlabru)
 library(INLA)
-library(rSPDE)
-library(MetricGraph)
-library(sf)
-library(sp)
-library(tidyverse) 
 
-num_cores <- parallel::detectCores() - 2
+load("/home/vitorsr/data_fluviometria/network_data_3.RData")
 
-load("/home/vitorsr/data_fluviometria/net_metricgraph_input.RData")
-
-graph$add_observations(
-  data = df_data_2,
-  normalized = TRUE,
-  clear_obs = TRUE, 
-  group = 'space_time_group',
-  group_sep = '.'
+stack_mult <- inla.stack(
+  data = list(y = y_matrix),
+  A = list(1, 
+           1, 
+           1,
+           1),  
+  effects = list(
+    global = list(
+      rwtimebasin = data_filled$time_index,
+      seastimetbasin = data_filled$time_index,
+      fgntimebasin = data_filled$time_index
+    ),
+    local_scaling =  list(mu1      = data_filled$time1_index,
+                          mu2      = data_filled$time2_index,
+                          mu3      = data_filled$time3_index,
+                          mu4      = data_filled$time4_index,
+                          mu5     = data_filled$time5_index,
+                          mu6     = data_filled$time6_index,
+                          mu7     = data_filled$time7_index,
+                          mu8     = data_filled$time8_index,
+                          mu9     = data_filled$time9_index,
+                          mu10     = data_filled$time10_index,
+                          mu11     = data_filled$time11_index,
+                          mu12     = data_filled$time12_index,
+                          mu13     = data_filled$time13_index,
+                          mu14     = data_filled$time14_index,
+                          mu15     = data_filled$time15_index,
+                          mu16    = data_filled$time16_index,
+                          mu17     = data_filled$time17_index,
+                          mu18     = data_filled$time18_index,
+                          mu19     = data_filled$time19_index,
+                          mu20     = data_filled$time20_index,
+                          mu21     = data_filled$time21_index,
+                          mu22     = data_filled$time22_index,
+                          mu23     = data_filled$time23_index,
+                          mu24     = data_filled$time24_index,
+                          mu25     = data_filled$time25_index,
+                          mu26     = data_filled$time26_index,
+                          mu27     = data_filled$time27_index,
+                          rwtime1      = data_filled$time1_index,
+                          rwtime2      = data_filled$time2_index,
+                          rwtime3      = data_filled$time3_index,
+                          rwtime4      = data_filled$time4_index,
+                          rwtime5     = data_filled$time5_index,
+                          rwtime6     = data_filled$time6_index,
+                          rwtime7     = data_filled$time7_index,
+                          rwtime8     = data_filled$time8_index,
+                          rwtime9     = data_filled$time9_index,
+                          rwtime10     = data_filled$time10_index,
+                          rwtime11     = data_filled$time11_index,
+                          rwtime12     = data_filled$time12_index,
+                          rwtime13     = data_filled$time13_index,
+                          rwtime14     = data_filled$time14_index,
+                          rwtime15     = data_filled$time15_index,
+                          rwtime16     = data_filled$time16_index,
+                          rwtime17     = data_filled$time17_index,
+                          rwtime18     = data_filled$time18_index,
+                          rwtime19     = data_filled$time19_index,
+                          rwtime20     = data_filled$time20_index,
+                          rwtime21     = data_filled$time21_index,
+                          rwtime22     = data_filled$time22_index,
+                          rwtime23     = data_filled$time23_index,
+                          rwtime24     = data_filled$time24_index,
+                          rwtime25     = data_filled$time25_index,
+                          rwtime26     = data_filled$time26_index,
+                          rwtime27     = data_filled$time27_index,
+                          seastime1      = data_filled$time1_index,
+                          seastime2      = data_filled$time2_index,
+                          seastime3      = data_filled$time3_index,
+                          seastime4      = data_filled$time4_index,
+                          seastime5     = data_filled$time5_index,
+                          seastime6     = data_filled$time6_index,
+                          seastime7     = data_filled$time7_index,
+                          seastime8     = data_filled$time8_index,
+                          seastime9     = data_filled$time9_index,
+                          seastime10     = data_filled$time10_index,
+                          seastime11     = data_filled$time11_index,
+                          seastime12     = data_filled$time12_index,
+                          seastime13     = data_filled$time13_index,
+                          seastime14     = data_filled$time14_index,
+                          seastime15     = data_filled$time15_index,
+                          seastime16     = data_filled$time16_index,
+                          seastime17     = data_filled$time17_index,
+                          seastime18     = data_filled$time18_index,
+                          seastime19     = data_filled$time19_index,
+                          seastime20     = data_filled$time20_index,
+                          seastime21     = data_filled$time21_index,
+                          seastime22     = data_filled$time22_index,
+                          seastime23     = data_filled$time23_index,
+                          seastime24     = data_filled$time24_index,
+                          seastime25     = data_filled$time25_index,
+                          seastime26     = data_filled$time26_index,
+                          seastime27     = data_filled$time27_index,
+                          fgntime1       = data_filled$time1_index,
+                          fgntime2       = data_filled$time2_index,
+                          fgntime3       = data_filled$time3_index,
+                          fgntime4       = data_filled$time4_index,
+                          fgntime5     = data_filled$time5_index,
+                          fgntime6      = data_filled$time6_index,
+                          fgntime7      = data_filled$time7_index,
+                          fgntime8      = data_filled$time8_index,
+                          fgntime9      = data_filled$time9_index,
+                          fgntime10      = data_filled$time10_index,
+                          fgntime11      = data_filled$time11_index,
+                          fgntime12      = data_filled$time12_index,
+                          fgntime13      = data_filled$time13_index,
+                          fgntime14      = data_filled$time14_index,
+                          fgntime15      = data_filled$time15_index,
+                          fgntime16      = data_filled$time16_index,
+                          fgntime17      = data_filled$time17_index,
+                          fgntime18      = data_filled$time18_index,
+                          fgntime19      = data_filled$time19_index,
+                          fgntime20      = data_filled$time20_index,
+                          fgntime21      = data_filled$time21_index,
+                          fgntime22      = data_filled$time22_index,
+                          fgntime23      = data_filled$time23_index,
+                          fgntime24      = data_filled$time24_index,
+                          fgntime25      = data_filled$time25_index,
+                          fgntime26      = data_filled$time26_index,
+                          fgntime27      = data_filled$time27_index
+    ),
+    local = list( artime1      = data_filled$time1_index,
+                  artime2      = data_filled$time2_index,
+                  artime3      = data_filled$time3_index,
+                  artime4      = data_filled$time4_index,
+                  artime5     = data_filled$time5_index,
+                  artime6     = data_filled$time6_index,
+                  artime7     = data_filled$time7_index,
+                  artime8     = data_filled$time8_index,
+                  artime9     = data_filled$time9_index,
+                  artime10     = data_filled$time10_index,
+                  artime11     = data_filled$time11_index,
+                  artime12     = data_filled$time12_index,
+                  artime13     = data_filled$time13_index,
+                  artime14    = data_filled$time14_index,
+                  artime15     = data_filled$time15_index,
+                  artime16     = data_filled$time16_index,
+                  artime17     = data_filled$time17_index,
+                  artime18     = data_filled$time18_index,
+                  artime19     = data_filled$time19_index,
+                  artime20     = data_filled$time20_index,
+                  artime21     = data_filled$time21_index,
+                  artime22     = data_filled$time22_index,
+                  artime23     = data_filled$time23_index,
+                  artime24     = data_filled$time24_index,
+                  artime25     = data_filled$time25_index,
+                  artime26     = data_filled$time26_index,
+                  artime27     = data_filled$time27_index),
+    
+    series_id = data_filled$gauge_id
+  ),
+  tag = "temporal"
 )
 
-
-t <- seq(from = 1, to = 236, length.out = 236)
-
-mesh_time <- fm_mesh_1d(t)
-
-st_graph <- rspde.spacetime(mesh_space = graph, 
-                            mesh_time = mesh_time, 
-                            alpha = 2,
-                            beta = 1,
-                            parameterization = "matern")
-
-
-st_data_inla <- graph_data_rspde(st_graph, 
-                                 name = "field", 
-                                 time = "space_index",
-                                 bru = FALSE)
-                                 
-A <- st_data_inla$basis 
- 
-stk_dat <- inla.stack(data = list( value = y_matrix), 
-                      A = list(A,
-                               1,
-                               1) ,
-                      effects = list(c(st_data_inla[["index"]], Intercept = 1),
-                                     global = list(rwtimebasin =df_data_2$time_index,
-                                                   seastimetbasin =df_data_2$time_index,
-                                                   fgntimebasin =df_data_2$time_index),
-                                     local_scaling =  list(mu1      = df_data_2$time1_index,
-                                                           mu2      = df_data_2$time2_index,
-                                                           mu3      = df_data_2$time3_index,
-                                                           mu4      = df_data_2$time4_index,
-                                                           mu5      = df_data_2$time5_index,
-                                                           mu6      = df_data_2$time6_index,
-                                                           mu7      = df_data_2$time7_index,
-                                                           mu8      = df_data_2$time8_index,
-                                                           mu9      = df_data_2$time9_index,
-                                                           mu10     = df_data_2$time10_index,
-                                                           mu11     = df_data_2$time11_index,
-                                                           mu12     = df_data_2$time12_index,
-                                                           mu13     = df_data_2$time13_index,
-                                                           mu14     = df_data_2$time14_index,
-                                                           mu15     = df_data_2$time15_index,
-                                                           mu16     = df_data_2$time16_index,
-                                                           mu17     = df_data_2$time17_index,
-                                                           mu18     = df_data_2$time18_index,
-                                                           mu19     = df_data_2$time19_index,
-                                                           mu20     = df_data_2$time20_index,
-                                                           mu21     = df_data_2$time21_index,
-                                                           mu22     = df_data_2$time22_index,
-                                                           mu23     = df_data_2$time23_index,
-                                                           mu24     = df_data_2$time24_index,
-                                                           mu25     = df_data_2$time25_index,
-                                                           mu26     = df_data_2$time26_index,
-                                                           mu27     = df_data_2$time27_index))
-                                     )
-                                                           
-                                                           
-save.image("/home/vitorsr/data_fluviometria/net_metricgraph_input_2.Rdata")
+save.image(file = "multvar_likelihood_inputs.RData")
