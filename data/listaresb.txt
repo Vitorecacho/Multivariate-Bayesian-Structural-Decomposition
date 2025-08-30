@@ -1,0 +1,27 @@
+﻿Alto Araguaia.txt
+Arapoema.txt
+Araguaina.txt
+Araguantins.txt
+Aruana.txt
+Balneario Cachoeira Grande.txt
+Bandeirantes.txt
+Barra do Garças.txt
+Barreira da Cruz.txt
+Barreira do Pequi.txt
+Conceicao do Araguaia.txt
+Ivolandia.txt
+Jusante do Rio Pitando.txt
+Montes Claros de Goias.txt
+Muricilandia.txt
+Piraque.txt
+Ponte Rio Piranhas.txt
+Praia Alta.txt
+Santo Antonio do Leverger.txt
+Sao Feliz do Araguaia.txt
+Tesouro.txt
+Toricueije.txt
+Torixoreu.txt
+Travessao.txt
+Trecho Medio.txt
+Xambioa.txt
+Xavantina.txt

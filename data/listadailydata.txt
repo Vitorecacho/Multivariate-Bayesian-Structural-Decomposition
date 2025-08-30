@@ -1,0 +1,27 @@
+﻿Alto Araguaia.csv
+Arapoema.csv
+Araguaina.csv
+Araguantins.csv
+Aruana.csv
+Balneario Cachoeira Grande.csv
+Bandeirantes.csv
+Barra do Garças.csv
+Barreira da Cruz.csv
+Barreira do Pequi.csv
+Conceicao do Araguaia.csv
+Ivolandia.csv
+Jusante do Rio Pitando.csv
+Montes Claros de Goias.csv
+Muricilandia.csv
+Piraque.csv
+Ponte Rio Piranhas.csv
+Praia Alta.csv
+Santo Antonio do Leverger.csv
+Sao Feliz do Araguaia.csv
+Tesouro.csv
+Toricueije.csv
+Torixoreu.csv
+Travessao.csv
+Trecho Medio.csv
+Xambioa.csv
+Xavantina.csv
