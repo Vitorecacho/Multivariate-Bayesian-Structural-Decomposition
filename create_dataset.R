@@ -23,7 +23,7 @@ coordi_new <- coordi_new %>%
 
 # loading data from streams
 
-lista=as.matrix(read.table("listaresb.txt",sep="\t"))
+lista=as.matrix(read.table("data/listaresb.txt",sep="\t"))
 
 anosf=1965:2023
 indexf=c()
