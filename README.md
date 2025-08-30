@@ -1,5 +1,4 @@
-This guide outlines the necessary steps to run the analysis. The process involves executing three R scripts in a specific sequence. 
-Each script is designed to process data and generate an output that serves as the input for the next script.
+This guide outlines the necessary steps to run the analysis.
 
 ## Prerequisites
 All required R libraries are listed at the top of each script file. When you install these primary libraries, 
