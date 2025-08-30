@@ -62,8 +62,6 @@ for (j in 1:dim(lista)[1]){
   lindex[[j]]=index
 }
 
-#Creating the stack
-
 library(RANN) 
 
 data_df <- purrr::map_dfr(
