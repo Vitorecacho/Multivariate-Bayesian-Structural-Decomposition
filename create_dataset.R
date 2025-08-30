@@ -4,7 +4,7 @@ rm(list=ls())
 
 # loading data from stations
 
-dadose=read.table("estacoes_coordenadas.csv",sep=";",header=T)
+dadose=read.table("data/estacoes_coordenadas.csv",sep=";",header=T)
 
 ro=order(dadose[,2])
 dadose=dadose[ro,]
